@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { serverUrl } from '../App'
 import { useDispatch } from 'react-redux'
 import { setUserData } from '../redux/userSlice';
+import axios from 'axios';
 
 const getCurrentUser = () => {
 
@@ -10,7 +11,7 @@ const getCurrentUser = () => {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const result = await axios.get(serverUrl + "/api/user/getuser", { withCredentials: true })
+                const result = await axios.get(serverUrl + "/api/user/user", { withCredentials: true })
                 dispatch(setUserData(result.data));
                 console.log(result.data);
             } catch (error) {
@@ -20,7 +21,7 @@ const getCurrentUser = () => {
         }
         fetchUser();
     }, [])
-    
+
 }
 
 export default getCurrentUser
