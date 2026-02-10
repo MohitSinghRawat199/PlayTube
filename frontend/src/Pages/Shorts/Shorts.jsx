@@ -2,7 +2,7 @@ import React from 'react'
 
 const Shorts = () => {
   return (
-    <div>
+    <div cla>
       Shorts components
     </div>
   )

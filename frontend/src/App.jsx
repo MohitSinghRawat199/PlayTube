@@ -5,10 +5,12 @@ import SignIn from './Pages/SignIn'
 import Home from './Pages/Home'
 import CustomAlerts from './components/CustomAlerts'
 import Shorts from './Pages/Shorts/Shorts'
+import getCurrentUser from './CustomHooks/getCurrentUser'
 
 export const serverUrl ="http://localhost:8000"
 
 const App = () => {
+  getCurrentUser();
   return (
     <>
       <CustomAlerts/>

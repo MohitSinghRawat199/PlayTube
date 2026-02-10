@@ -162,7 +162,6 @@ const SignIn = () => {
                 {loading?<ClipLoader color='black' size={20}/>:"Sign In"}
               </button>
             </div>
-
           </>
         )}
       </div>

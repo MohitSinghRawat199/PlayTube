@@ -21,6 +21,7 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [sideOpen, setSideOpen] = useState(true);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
 
   const isActive = (path) => location.pathname === path;
 
@@ -64,6 +65,7 @@ const Home = () => {
       <header className="fixed top-0 left-0 right-0 h-[60px] bg-[#0f0f0f] border-b border-gray-800 z-50">
         <div className="flex items-center justify-between h-full px-3">
           <div className="flex items-center gap-4">
+            {/* Sidebar toggle only for desktop */}
             <button
               onClick={() => setSideOpen(!sideOpen)}
               className="hidden md:flex bg-[#272727] p-2 rounded-full"
@@ -80,11 +82,46 @@ const Home = () => {
             </div>
           </div>
 
+          {/* Desktop Search */}
+          <div className="hidden md:flex flex-1 max-w-xl mx-4 items-center">
+            <input
+              type="text"
+              placeholder="Search"
+              className="flex-1 bg-[#121212] px-4 py-2 rounded-l-full outline-none border border-gray-700"
+            />
+            <button className="bg-[#272727] px-4 rounded-r-full border border-gray-700">
+              <FaSearch />
+            </button>
+          </div>
+
           <div className="flex items-center gap-3">
-            <FaSearch className="md:hidden" />
+            {/* Mobile Search icon */}
+            <FaSearch
+              className="md:hidden cursor-pointer"
+              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
+            />
             <FaUserCircle className="text-3xl hidden md:block text-gray-400" />
           </div>
         </div>
+
+        {/* Mobile search input */}
+        {mobileSearchOpen && (
+          <div className="absolute top-[60px] left-0 right-0 bg-[#0f0f0f] p-3 border-b border-gray-800 md:hidden">
+            <div className="flex">
+              <input
+                type="text"
+                placeholder="Search"
+                className="flex-1 bg-[#121212] px-4 py-2 rounded-l-full outline-none border border-gray-700"
+              />
+              <button
+                onClick={() => setMobileSearchOpen(false)}
+                className="bg-[#272727] px-4 rounded-r-full border border-gray-700"
+              >
+                <FaSearch />
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* SIDEBAR */}
@@ -118,13 +155,13 @@ const Home = () => {
         </nav>
       </aside>
 
-      {/* MAIN */}
+      {/* MAIN CONTENT */}
       <main
         className={`pt-[60px] pb-[60px] ${
           sideOpen ? "md:pl-60" : "md:pl-20"
         }`}
       >
-        {/* CATEGORIES (HOME ONLY) */}
+        {/* Categories only on Home */}
         {location.pathname === "/" && (
           <div className="sticky top-[60px] z-40 bg-[#0f0f0f] px-4 py-2">
             <div className="flex gap-2 overflow-x-auto scrollbar-hide">
